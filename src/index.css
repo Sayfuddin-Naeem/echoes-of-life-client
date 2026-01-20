@@ -1,0 +1,181 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+  name: "echoesoflife";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  /* ===== Base (paper-like, calm reading background) ===== */
+  --color-base-100: oklch(98% 0.01 240); /* main background */
+  --color-base-200: oklch(95% 0.015 240); /* cards */
+  --color-base-300: oklch(91% 0.02 240); /* borders */
+  --color-base-content: oklch(22% 0.03 240); /* text */
+
+  /* ===== Primary (Wisdom Indigo – brand color) ===== */
+  --color-primary: oklch(52% 0.18 255);
+  --color-primary-content: oklch(98% 0.01 255);
+
+  /* ===== Secondary (Soft Teal – growth & reflection) ===== */
+  --color-secondary: oklch(65% 0.14 190);
+  --color-secondary-content: oklch(98% 0.01 190);
+
+  /* ===== Accent (Warm Insight Highlight) ===== */
+  --color-accent: oklch(70% 0.12 140);
+  --color-accent-content: oklch(20% 0.02 140);
+
+  /* ===== Neutral (Subtle UI elements) ===== */
+  --color-neutral: oklch(45% 0.03 240);
+  --color-neutral-content: oklch(98% 0.01 240);
+
+  /* ===== States ===== */
+  --color-info: oklch(68% 0.12 220);
+  --color-info-content: oklch(98% 0.01 220);
+
+  --color-success: oklch(64% 0.16 150);
+  --color-success-content: oklch(98% 0.01 150);
+
+  --color-warning: oklch(78% 0.16 85);
+  --color-warning-content: oklch(22% 0.04 85);
+
+  --color-error: oklch(60% 0.22 30);
+  --color-error-content: oklch(98% 0.01 30);
+
+  /* ===== Shape & Feel ===== */
+  --radius-selector: 1rem;     /* pills, tabs */
+  --radius-field: 0.5rem;      /* inputs */
+  --radius-box: 0.75rem;       /* cards */
+
+  /* ===== Spacing ===== */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* ===== Borders ===== */
+  --border: 1px;
+
+  /* ===== Effects ===== */
+  --depth: 1;   /* soft shadows */
+  --noise: 0;   /* clean, mindful UI */
+}
+
+@plugin "daisyui/theme" {
+  name: "echoesoflife-dark";
+  prefersdark: true;
+  color-scheme: dark;
+
+  /* ===== Base (Deep night background) ===== */
+  --color-base-100: oklch(14% 0.01 240); /* main background */
+  --color-base-200: oklch(18% 0.015 240); /* cards */
+  --color-base-300: oklch(24% 0.02 240); /* borders */
+  --color-base-content: oklch(92% 0.02 240); /* text */
+
+  /* ===== Primary (Soft Indigo glow) ===== */
+  --color-primary: oklch(65% 0.16 255);
+  --color-primary-content: oklch(14% 0.01 255);
+
+  /* ===== Secondary (Muted Teal) ===== */
+  --color-secondary: oklch(60% 0.12 190);
+  --color-secondary-content: oklch(14% 0.01 190);
+
+  /* ===== Accent (Gentle growth highlight) ===== */
+  --color-accent: oklch(66% 0.14 150);
+  --color-accent-content: oklch(14% 0.01 150);
+
+  /* ===== Neutral ===== */
+  --color-neutral: oklch(30% 0.02 240);
+  --color-neutral-content: oklch(92% 0.02 240);
+
+  /* ===== States ===== */
+  --color-info: oklch(62% 0.12 220);
+  --color-info-content: oklch(14% 0.01 220);
+
+  --color-success: oklch(60% 0.14 150);
+  --color-success-content: oklch(14% 0.01 150);
+
+  --color-warning: oklch(72% 0.14 90);
+  --color-warning-content: oklch(14% 0.01 90);
+
+  --color-error: oklch(62% 0.20 30);
+  --color-error-content: oklch(14% 0.01 30);
+
+  /* ===== Shape & Feel ===== */
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+@theme{
+    /* fonts  */
+    --font-serif-4: "Source Serif 4", serif;
+    --font-inter:"Inter", sans-serif;
+}
+
+@layer base{
+    html{
+        font-size: 100%;
+    }
+
+    *{
+        font-family: var(--font-serif-4);
+        font-size: 1rem;
+    }
+    body{
+        @apply bg-base-100;
+    }
+}
+
+@layer components{
+    .bg-gradient{
+        @apply bg-linear-to-br from-base-100 via-base-200 to-base-300;
+    }
+}
+
+/* Hero Slider */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Toast animation */
+/* Toast enter animation */
+@keyframes toast-slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Toast exit animation */
+@keyframes toast-slide-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Apply animations */
+.react-hot-toast > div {
+  animation: toast-slide-in 0.4s ease-out;
+}
+
+.react-hot-toast > div[aria-hidden="true"] {
+  animation: toast-slide-out 0.3s ease-in;
+}
+

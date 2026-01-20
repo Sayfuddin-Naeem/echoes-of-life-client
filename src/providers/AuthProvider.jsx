@@ -18,7 +18,7 @@ function AuthProvider({ children }) {
         setFbUser(firebaseUser);
         if (isLoadUser) {
           const backendUser = await loadBackendUser(firebaseUser);
-          setDbUser(backendUser);
+          setDbUser(backendUser.data);
         }
       } else {
         setFbUser(null);

@@ -1,7 +1,6 @@
 import { BookOpen, Crown, Globe, Home, Plus } from "lucide-react";
 import { NavLink } from "react-router";
 
-// Navigation Links Component
 const NavLinks = ({ isLoggedIn, isMobile, onLinkClick }) => {
   const publicLinks = [
     { name: 'Home', path: '/', icon: Home },

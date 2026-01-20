@@ -1,22 +1,19 @@
 import { Crown, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router";
+import { useAuth } from "../../../providers/AuthProvider";
 import AuthButtons from "./AuthButtons";
 import Logo from "./Logo";
 import NavLinks from "./NavLinks";
 import ThemeToggle from "./ThemeToggle";
 import UserDropdown from "./UserDropdown";
-import { Link } from "react-router";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Demo state - replace with actual auth state
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({
-    name: "John Doe",
-    photoURL: "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
-    isPremium: true,
-  });
+  const { dbUser } = useAuth();
+
+  dbUser && console.log(dbUser);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
@@ -29,11 +26,11 @@ const Navbar = () => {
 
       {/* Desktop Navigation */}
       <div className="hidden lg:flex flex-none gap-2">
-        <NavLinks isLoggedIn={isLoggedIn} isMobile={false} />
+        <NavLinks isLoggedIn={!!dbUser} isMobile={false} />
         <div className="divider divider-horizontal mx-0"></div>
         <ThemeToggle />
-        {isLoggedIn ? (
-          <UserDropdown user={user} />
+        {dbUser ? (
+          <UserDropdown user={dbUser} />
         ) : (
           <AuthButtons isMobile={false} />
         )}
@@ -60,21 +57,21 @@ const Navbar = () => {
         <div className="absolute top-full left-0 right-0 bg-base-100 shadow-lg lg:hidden">
           <div className="flex flex-col py-4 gap-1">
             <NavLinks
-              isLoggedIn={isLoggedIn}
+              isLoggedIn={!!dbUser}
               isMobile={true}
               onLinkClick={closeMenu}
             />
             <div className="divider my-2"></div>
-            {isLoggedIn ? (
+            {dbUser ? (
               <div className="px-4 py-2 flex items-center gap-3">
                 <img
-                  src={user.photoURL}
-                  alt={user.name}
+                  src={dbUser?.photoURL}
+                  alt={dbUser?.displayName}
                   className="w-10 h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
                 />
                 <div className="flex-1">
-                  <p className="font-semibold">{user.name}</p>
-                  {user.isPremium && (
+                  <p className="font-semibold capitalize">{dbUser?.displayName}</p>
+                  {dbUser?.isPremium && (
                     <span className="badge badge-primary badge-sm gap-1 mt-1">
                       <Crown className="w-3 h-3" />
                       Premium
@@ -83,7 +80,7 @@ const Navbar = () => {
                 </div>
               </div>
             ) : null}
-            {isLoggedIn ? (
+            {dbUser ? (
               <div className="flex flex-col gap-1 px-4">
                 <Link
                   to="/profile"

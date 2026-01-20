@@ -1,13 +1,12 @@
 import { LogIn, UserPlus } from "lucide-react";
 import { Link } from "react-router";
 
-// Auth Buttons Component
 const AuthButtons = ({ isMobile, onLinkClick }) => {
   if (isMobile) {
     return (
       <div className="flex flex-col gap-2 px-4 py-3">
         <Link
-          to="/login"
+          to="/signin"
           className="btn btn-ghost justify-start"
           onClick={onLinkClick}
         >
@@ -28,7 +27,7 @@ const AuthButtons = ({ isMobile, onLinkClick }) => {
 
   return (
     <div className="flex items-center gap-2">
-      <Link to="/login" className="btn btn-ghost">
+      <Link to="/signin" className="btn btn-ghost">
         Login
       </Link>
       <Link to="/signup" className="btn btn-primary">

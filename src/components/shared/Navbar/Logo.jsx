@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import NavbarLogo from "../Logoes/NavbarLogo";
+import NavbarLogo from "../Logos/NavbarLogo";
 
 const Logo = () => {
   return (
